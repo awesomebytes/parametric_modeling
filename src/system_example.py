@@ -11,7 +11,7 @@ from control.matlab import tf, c2d, step    # MATLAB-like functions
 #from scipy.signal import cont2discrete as c2d
 #from scipy.signal import step
 
-    
+
 # MATLAB:
 # syst_fake=tf([1],[1 2 3]) # from matlab to python, commas must be used to separate elements
 # >> syst_fake

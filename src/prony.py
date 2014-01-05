@@ -18,7 +18,7 @@ from convm import convm
 def prony(x, p, q):
     """Model a signal using Prony's method
  
-    Usage: [a,b,err] = prony(x,p,q)
+    Usage: [b,a,err] = prony(x,p,q)
  
     The input sequence x is modeled as the unit sample response of
     a filter having a system function of the form
@@ -66,7 +66,7 @@ def prony(x, p, q):
         # b(0) is x(0), but a better solution is to match energy
         b = np.sqrt(err)
  
-    return (a,b,err)
+    return (b,a,err)
  
 #function [a,b,err] = prony(x,p,q)
 #x   = x(:);
@@ -84,7 +84,7 @@ def main():
     x = np.ones(21)
     p = q = 1
     print('x: {}\np: {}\nq: {}'.format(x,p,q))
-    a,b,err = prony(x, p, q)
+    b,a,err = prony(x, p, q)
     print('a: {}\nb: {}\nerr: {}'.format(a,b,err))
  
     # From pp. 152-153
@@ -95,7 +95,7 @@ def main():
     nd = 5
     n = np.arange(11)
     i = np.sinc((n-nd)/2)/2
-    a,b,err = prony(i, p, q)
+    b,a,err = prony(i, p, q)
     print('a: {}\nb: {}\nerr: {}'.format(a,b,err))
  
 if __name__ == '__main__':
