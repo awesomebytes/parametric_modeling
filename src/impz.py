@@ -21,6 +21,7 @@ def impz(b,a):
 #     N  = impzlength(b,.00005);
 #   end
     N = len(b) * len(b) * len(b) # MATLAB AUTOFINDS THE SIZE HERE... 
+    #TODO: Implement some way of finding the autosieze of this... I used a couple of examples... matlab gave 43 as length we give 64
     x = zeros(N)
     x[0] = 1
     h = lfilter(b,a, x)
