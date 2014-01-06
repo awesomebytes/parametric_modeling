@@ -37,6 +37,7 @@ def prony(x, p, q):
     N = len(x)
     if p+q >= len(x):
         print('ERROR: model order too large')
+        print ("p q len(x) " + str(p) + " " + str(q) + " " + str(len(x)))
         sys.exit(1)
  
     # This formulation uses eq. 4.50, p. 153
@@ -59,14 +60,14 @@ def prony(x, p, q):
  
     # Solve for numerator coefficients
     if q>0:
-        # (This is the same as for Pad?�)
+        # (This is the same as for Pad?)
         b = np.dot(X[0:q+1,0:p+1], a)
     else:
         # all-pole model
         # b(0) is x(0), but a better solution is to match energy
         b = np.sqrt(err)
  
-    return (b,a,err)
+    return (b,a)
  
 #function [a,b,err] = prony(x,p,q)
 #x   = x(:);
@@ -100,4 +101,3 @@ def main():
  
 if __name__ == '__main__':
     main()
- 

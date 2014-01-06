@@ -6,10 +6,12 @@ Created on Sun Nov 17 12:30:46 2013
 @author: Sammy Pfeiffer
 """
 from numpy import allclose             # Grab all of the NumPy functions
+import numpy as np
 from matplotlib.pyplot import plot, show # Grab MATLAB plotting functions
 from control.matlab import tf, c2d, step    # MATLAB-like functions
 #from scipy.signal import cont2discrete as c2d
 #from scipy.signal import step
+from stmbc import stmcb
 
 
 # MATLAB:
@@ -78,10 +80,14 @@ output, t = step(syst_fake_dis)
 plot(output[0])
 show()
 
-# size(output)
+# out_len = len(output)
+out_len = len(output[0])
+
 # input=1:650;
 # input(:)=1;
+input_ = np.ones(out_len)
 # [num,den]=stmcb(output,input,0,2)
+[num,den]=stmcb(output[0],input_,0,2)
 # sys_model=tf(num,den,0.01)
 # step(sys_model)
 # hold on
