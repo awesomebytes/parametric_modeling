@@ -16,8 +16,8 @@ denOrder=4; numOrder=4;                 % system function of order 4
 % Den =1.0000   -2.3695    2.3140   -1.0547    0.1874
 Num
 Den
-subplot(211);                           % impulse response and input
-stem(impz(Num,Den,length(impulseResp)));   
-title('Impulse Response with Prony Design');
-subplot(212);
-stem(impulseResp); title('Input Impulse Response');
+% subplot(211);                           % impulse response and input
+% stem(impz(Num,Den,length(impulseResp)));   
+% title('Impulse Response with Prony Design');
+% subplot(212);
+% stem(impulseResp); title('Input Impulse Response');

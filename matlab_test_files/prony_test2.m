@@ -44,6 +44,7 @@ if c==0    % avoid divide by zero
     c=1;
 end
 display('this is the second part of toeplitz')
+[1 zeros(1,K)]
 H = toeplitz(h/c,[1 zeros(1,K)]);
 % K+1 by N+1
 if (K > N)

@@ -35,6 +35,10 @@ function [b,a] = prony_test(h, nb ,na)
 
 K = length(h) - 1;
 M = nb; N = na;
+display('K M N')
+K
+M
+N
 if K <= max(M,N)      % zero-pad input if necessary
     K = max(M,N)+1;
     h(K+1) = 0;
@@ -44,7 +48,10 @@ if c==0    % avoid divide by zero
     c=1;
 end
 display('this is the second part of toeplitz')
+[1 zeros(1,K)]
 H = toeplitz(h/c,[1 zeros(1,K)]);
+display('toeplitz is')
+H
 % K+1 by N+1
 if (K > N)
     H(:,(N+2):(K+1)) = [];

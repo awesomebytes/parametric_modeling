@@ -51,7 +51,8 @@ def prony_matlab(h, nb, na):
     K = len(h) - 1
     M = nb
     N = na
-
+    print "K, M, N"
+    print K, M, N
 # if K <= max(M,N)      % zero-pad input if necessary
 #     K = max(M,N)+1;
 #     h(K+1) = 0;
@@ -67,11 +68,10 @@ def prony_matlab(h, nb, na):
     if c == 0:
         c = 1  
 # H = toeplitz(h/c,[1 zeros(1,K)]);
-    print "toeplitz second part:"
-    print [1, np.zeros(1,K)]
-    H = toeplitz(h/c, [1, np.zeros(1,K)]) # probable problem with indices!
-    print "H (thanks to toeplitz) is:"
-    print H
+    second_part_toeplitz = np.zeros(K+1)
+    second_part_toeplitz[0] = 1
+    H = toeplitz(h/c, second_part_toeplitz) # probable problem with indices!
+    # The size of H is different... cause it comes from before different in h
 # % K+1 by N+1
 # if (K > N)
 #     H(:,(N+2):(K+1)) = [];
