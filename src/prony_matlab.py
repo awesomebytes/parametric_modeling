@@ -77,15 +77,15 @@ def prony_matlab(h, nb, na):
 #     H(:,(N+2):(K+1)) = [];
 # end
     if K > N:
-        H[:,N+2:K+1] = [] # probable problem with indices!
+        H = H[:,0:N+1] # Here we are just getting rid of all the columns after N+1
 
 # % Partition H matrix
 # H1 = H(1:(M+1),:);    % M+1 by N+1
-    H1 = H[0:M+1,:] # probable problem with indices!
+    H1 = H[0:M+1,:]
 # h1 = H((M+2):(K+1),1);    % K-M by 1
-    h1 = H[M+2:K+1,0] # probable problem with indices!
+    h1 = H[M+1:K,0]
 # H2 = H((M+2):(K+1),2:(N+1));    % K-M by N
-    H2 = H[M+2:K+1,1:N+1] # probable problem with indices!
+    H2 = H[M:K,0:N]
 # a = [1; -H2\h1].';
     #a = [0, -H2\h1]
     #\

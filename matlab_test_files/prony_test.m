@@ -54,12 +54,27 @@ display('toeplitz is')
 H
 % K+1 by N+1
 if (K > N)
-    H(:,(N+2):(K+1)) = [];
+%     display('H before doing this thing')
+%     H
+    H(:,(N+2):(K+1)) = []; % 43*43 matrix in my example and we are getting rid here of the columns...
+    % K=43 M=4 N=4;   H(all_rows, 4+2:43+1)
+%     display('H after doing this [] thing')
+%     H
+%     error('exiting')
 end
 % Partition H matrix
 H1 = H(1:(M+1),:);	% M+1 by N+1
+% display('H1 is')
+% H1
+
 h1 = H((M+2):(K+1),1);	% K-M by 1
+% display('h1 is')
+% h1
+
 H2 = H((M+2):(K+1),2:(N+1));	% K-M by N
+display('H2 is')
+H2
+error('exiting')
 a = [1; -H2\h1].';
 b = c*a*H1.';
 
