@@ -69,6 +69,8 @@ def prony_matlab(h, nb, na):
     second_part_toeplitz = np.zeros(K+1)
     second_part_toeplitz[0] = 1
     H = toeplitz(h/c, second_part_toeplitz) # probable problem with indices!
+    print "H is (toeplitz...)"
+    print H
     # The size of H is different... cause it comes from before different in h
 # % K+1 by N+1
 # if (K > N)

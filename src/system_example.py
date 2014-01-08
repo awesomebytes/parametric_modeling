@@ -82,7 +82,10 @@ show()
 
 # out_len = len(output)
 out_len = len(output[0])
-
+print "out_len is:"
+print out_len
+print "output is:"
+print output[0]
 # input=1:650;
 # input(:)=1;
 input_ = np.ones(out_len)

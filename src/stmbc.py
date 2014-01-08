@@ -7,7 +7,7 @@ Created on Sun Nov 17 12:30:46 2013
 This file pretends to imitate the behaviour of the MATLAB function with the same name.
 """
 
-from prony import prony
+from prony_matlab import prony_matlab
 from convmtx import convmtx
 from scipy.signal import lfilter
 import numpy as np
@@ -75,7 +75,9 @@ def stmcb(x, u_in=None, q=None, p=None, niter=5, a_in=None):
 #        [b,a_in] = prony(x,0,p);
 #     end
     if a_in == None:
-        [b, a_in] = prony(x, 0, p)
+        [b, a_in] = prony_matlab(x, 0, p)
+        print "p is:"
+        print p
         print "b is: "
         print b
         print "a_in is:"

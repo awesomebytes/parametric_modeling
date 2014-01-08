@@ -52,6 +52,8 @@ else
     end
     if nargin < 6
        [b,a_in] = prony(x,0,p);
+       disp('p is:')
+       disp(p)
        disp('b is:')
        disp(b)
        disp('a_in is:')
