@@ -64,17 +64,27 @@ if (K > N)
 end
 % Partition H matrix
 H1 = H(1:(M+1),:);	% M+1 by N+1
-% display('H1 is')
-% H1
+display('H1 is')
+H1
 
 h1 = H((M+2):(K+1),1);	% K-M by 1
 % display('h1 is')
 % h1
 
 H2 = H((M+2):(K+1),2:(N+1));	% K-M by N
-display('H2 is')
-H2
-error('exiting')
+% display('H2 is')
+% H2
+size(H2)
+display('h1 is')
+h1
+size(h1)
+display('sol -H2\h1')
+sol = -H2\h1
+% display('other way') % same result
+% mldivide(-H2,h1)
 a = [1; -H2\h1].';
 b = c*a*H1.';
-
+display('c*a')
+c*a
+display('c*a*H1')
+c*a*H1.'

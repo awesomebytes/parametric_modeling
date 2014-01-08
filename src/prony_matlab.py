@@ -51,8 +51,6 @@ def prony_matlab(h, nb, na):
     K = len(h) - 1
     M = nb
     N = na
-    print "K, M, N"
-    print K, M, N
 # if K <= max(M,N)      % zero-pad input if necessary
 #     K = max(M,N)+1;
 #     h(K+1) = 0;
@@ -83,16 +81,19 @@ def prony_matlab(h, nb, na):
 # H1 = H(1:(M+1),:);    % M+1 by N+1
     H1 = H[0:M+1,:]
 # h1 = H((M+2):(K+1),1);    % K-M by 1
-    h1 = H[M+1:K,0]
+    h1 = H[M+1:K+1,0]
 # H2 = H((M+2):(K+1),2:(N+1));    % K-M by N
     H2 = H[M:K,0:N]
-# a = [1; -H2\h1].';
-    #a = [0, -H2\h1]
+# a = [1; -H2\h1].';    
     #\
     # Matrix left division
     # x = A\B is the solution to the equation Ax = B. Matrices A and B must have the same number of rows.
+    #H2 and h1 won't make ever a square (I think) matrix so I will just solve with least squares
+    a_right = np.linalg.lstsq(-H2,h1)[0]
+    a_left = np.array([1])
+    a = np.append(a_left, a_right)
+
 # b = c*a*H1.';
-    #b = c*a*H1
-    b = 0
-    a = 0
+    b = c*(H1.dot(a))
+
     return [b, a]
