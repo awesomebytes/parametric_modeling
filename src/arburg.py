@@ -20,10 +20,19 @@ http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.
 #import matcompat
 #from matcompat import *
 import spectrum
+import numpy as np
 
 #def arburg(x, p): # original def
-def arburg(args):
-    return spectrum.arburg(args[0], args[1], args[2])
+def arburg(*args):
+    x = args[0]
+    p = args[1]
+    if len(args) == 3:
+        criteria = args[2]
+        return spectrum.arburg(x, p, criteria)
+    else:
+        [A, E, K] = spectrum.arburg(x, p)
+        A = np.hstack((1, A)) # Adding unity, MATLAB gives it
+        return A, E
 
 
 
