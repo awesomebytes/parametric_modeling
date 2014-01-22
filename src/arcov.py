@@ -1,15 +1,21 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+Created on Jan 22 20:38 2014
 
+@author: Sammy Pfeiffer
+This file pretends to imitate the behaviour of the MATLAB function arcov
+
+Using spectrum implementation:
+http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html#spectrum.covar.arcovar
+"""
 import numpy as np
 import scipy
 from matcompat import *
-
-# if available import pylab (from matlibplot)
-try:
-    import matplotlib.pylab as plt
-except ImportError:
-    pass
+import spectrum
 
 def arcov(x, p):
+    return spectrum.covar.arcovar(x,p)
 
     # Local Variables: a, msgobj, p, msg, x, e
     # Function calls: nargchk, arcov, nargin, isempty, error, arparest
@@ -29,11 +35,11 @@ def arcov(x, p):
     #%   Author(s): R. Losada and P. Pacheco
     #%   Copyright 1988-2002 The MathWorks, Inc.
     #%   $Revision: 1.13.4.3 $  $Date: 2011/05/13 18:06:51 $
-    matcompat.error(nargchk(2., 2., nargin, 'struct'))
-    [a, e, msg, msgobj] = arparest(x, p, 'covariance')
-    if not isempty(msg):
-        matcompat.error(msgobj)
-    
-    
-    #% [EOF] - arcov.m
-    return [a, e]
+    #matcompat.error(nargchk(2., 2., nargin, 'struct'))
+#     [a, e, msg, msgobj] = arparest(x, p, 'covariance') 
+#     if not isempty(msg):
+#         matcompat.error(msgobj)
+#     
+#     
+#     #% [EOF] - arcov.m
+#     return [a, e]

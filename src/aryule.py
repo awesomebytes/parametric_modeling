@@ -1,15 +1,22 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+Created on Jan 22 20:38 2014
 
-import numpy as np
-import scipy
-from matcompat import *
+@author: Sammy Pfeiffer
+This file pretends to imitate the behaviour of the MATLAB function aryule
 
-# if available import pylab (from matlibplot)
-try:
-    import matplotlib.pylab as plt
-except ImportError:
-    pass
+Using spectrum implementation:
+http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.yulewalker.aryule
+
+"""
+# import numpy as np
+# import scipy
+# from matcompat import *
+import spectrum
 
 def aryule(x, p):
+    return spectrum.aryule(x, p)
 
     # Local Variables: a, e, k, nx, p, R, x, mx
     # Function calls: aryule, nargchk, min, issparse, nargin, length, isempty, error, levinson, message, xcorr, round, size
@@ -47,24 +54,24 @@ def aryule(x, p):
     #%   Author(s): R. Losada
     #%   Copyright 1988-2004 The MathWorks, Inc.
     #%   $Revision: 1.12.4.6 $  $Date: 2012/10/29 19:30:38 $
-    matcompat.error(nargchk(2., 2., nargin, 'struct'))
-    #% Check the input data type. Single precision is not supported.
-    #%try
-    #%    chkinputdatatype(x,p);
-    #%catch ME
-    #%    throwAsCaller(ME);
-    #%end
-    [mx, nx] = matcompat.size(x)
-    if isempty(x) or length(x)<p or matcompat.max(mx, nx) > 1.:
-        matcompat.error(message('signal:aryule:InvalidDimensions'))
-    elif isempty(p) or not p == np.round(p):
-        matcompat.error(message('signal:aryule:MustBeInteger'))
-        
-    
-    if issparse(x):
-        matcompat.error(message('signal:aryule:Sparse'))
-    
-    
-    R = plt.xcorr(x, p, 'biased')
-    [a, e, k] = levinson(R[int(p+1.)-1:], p)
-    return [a, e, k]
+#     matcompat.error(nargchk(2., 2., nargin, 'struct'))
+#     #% Check the input data type. Single precision is not supported.
+#     #%try
+#     #%    chkinputdatatype(x,p);
+#     #%catch ME
+#     #%    throwAsCaller(ME);
+#     #%end
+#     [mx, nx] = matcompat.size(x)
+#     if isempty(x) or length(x)<p or matcompat.max(mx, nx) > 1.:
+#         matcompat.error(message('signal:aryule:InvalidDimensions'))
+#     elif isempty(p) or not p == np.round(p):
+#         matcompat.error(message('signal:aryule:MustBeInteger'))
+#         
+#     
+#     if issparse(x):
+#         matcompat.error(message('signal:aryule:Sparse'))
+#     
+#     
+#     R = plt.xcorr(x, p, 'biased')
+#     [a, e, k] = levinson(R[int(p+1.)-1:], p)
+#     return [a, e, k]

@@ -1,16 +1,24 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+Created on Jan 22 20:38 2014
 
-import numpy as np
-import scipy
-from matcompat import *
+@author: Sammy Pfeiffer
+This file pretends to imitate the behaviour of the MATLAB function armcov
 
-# if available import pylab (from matlibplot)
-try:
-    import matplotlib.pylab as plt
-except ImportError:
-    pass
+Using spectrum implementation:
+http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html
+search for modcovar (can't direct link it)
+"""
+# import numpy as np
+# import scipy
+# from matcompat import *
+import spectrum
 
 def armcov(x, p):
+    return spectrum.modcovar(x, p)
 
+### ORIGINAL IMPLEMENTATION
     # Local Variables: a, msgobj, p, msg, x, e
     # Function calls: nargchk, nargin, isempty, error, arparest, armcov
     #%ARMCOV   AR parameter estimation via modified covariance method.
@@ -30,11 +38,11 @@ def armcov(x, p):
     #%   Author(s): R. Losada and P. Pacheco
     #%   Copyright 1988-2002 The MathWorks, Inc.
     #%   $Revision: 1.13.4.3 $  $Date: 2011/05/13 18:06:53 $
-    matcompat.error(nargchk(2., 2., nargin, 'struct'))
-    [a, e, msg, msgobj] = arparest(x, p, 'modified')
-    if not isempty(msg):
-        matcompat.error(msgobj)
-    
-    
-    #% [EOF] - armcov.m
-    return [a, e]
+#     matcompat.error(nargchk(2., 2., nargin, 'struct'))
+#     [a, e, msg, msgobj] = arparest(x, p, 'modified')
+#     if not isempty(msg):
+#         matcompat.error(msgobj)
+#     
+#     
+#     #% [EOF] - armcov.m
+#     return [a, e]
