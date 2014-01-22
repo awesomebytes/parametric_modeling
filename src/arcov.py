@@ -15,7 +15,9 @@ from matcompat import *
 import spectrum
 
 def arcov(x, p):
-    return spectrum.covar.arcovar(x,p)
+    [A, E] = spectrum.covar.arcovar(x,p)
+    A = np.hstack((1,A)) # MATLAB gives back initial value 1, so we do the same 
+    return A, E
 
     # Local Variables: a, msgobj, p, msg, x, e
     # Function calls: nargchk, arcov, nargin, isempty, error, arparest
