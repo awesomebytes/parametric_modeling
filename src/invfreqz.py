@@ -1,7 +1,21 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+Created on Jan 22 22:01 2014
 
+@author: Sammy Pfeiffer
+
+invfreqz in python based on the matlab implementation
+
+This file can be translated once the method
+polystab
+from spectrum library has it implemented....
+"""
 import numpy as np
 import scipy
+from scipy import linalg
 from matcompat import *
+
 
 # if available import pylab (from matlibplot)
 try:
@@ -71,80 +85,82 @@ def invfreqz(g, w, varargin):
     #%function [b,a]=invfreqz(g,w,nb,na,wf,maxiter,tol,pf)
     #% OR
     #%function [b,a]=invfreqz(g,w,'complex',nb,na,wf,maxiter,tol,pf)
-    matcompat.error(nargchk(4., 9., nargin, 'struct'))
-    if ischar(varargin.cell[0]):
-        realStr = lower(varargin.cell[0])
+    #matcompat.error(nargchk(4., 9., nargin, 'struct'))
+    if type(varargin.cell[0]) == type('a'):
+        realStr = varargin.cell[0].lower()
         varargin[0] = np.array([])
     else:
         realStr = 'real'
         
     
-    gaussFlag = length(varargin) > 3.
+    gaussFlag = len(varargin) > 3.
     #% run Gauss-Newton algorithm or not?
     if length(varargin)<6.:
         varargin.cell[5] = np.array([])
         #% pad varargin with []'s
     
     
-    [nb, na, wf, maxiter, tol, pf] = deal(varargin.cell[:])
+    [nb, na, wf, maxiter, tol, pf] = varargin.cell[:]
     _switch_val=realStr
     if False: # switch 
         pass
     elif _switch_val == 'real':
-        realFlag = 1.
+        realFlag = 1
     elif _switch_val == 'complex':
-        realFlag = 0.
+        realFlag = 0
     else:
-        matcompat.warning(message('signal:invfreqz:InvalidParam', realStr))
-        realFlag = 0.
+        print 'signal:invfreqz:InvalidParam', realStr
+        realFlag = 0
     
     nk = 0.
     T = 1.
     #% The code is prepared for arbitrary sampling interval T and for
     #% constraining the numerator to begin with nk zeros.
     nb = nb+nk+1.
-    if isempty(pf):
-        verb = 0.
-    elif strcmp(pf, 'trace'):
-        verb = 1.
+    if pf == None:
+        verb = 0
+    elif pf == 'trace':
+        verb = 1
         
     else:
-        matcompat.error(message('signal:invfreqz:NotSupported', pf))
+        print 'signal:invfreqz:NotSupported', pf
+        exit(0)
         
     
-    if isempty(wf):
-        wf = np.ones(length(w), 1.)
+    if wf == None:
+        wf = np.ones(len(w))
     
     
     wf = np.sqrt(wf)
-    if length(g) != length(w):
-        matcompat.error(message('signal:invfreqz:InvalidDimensions', 'H', 'W'))
+    if len(g) != len(w):
+        print 'signal:invfreqz:InvalidDimensions', 'H', 'W'
     
     
     if length(wf) != length(w):
-        matcompat.error(message('signal:invfreqz:InvalidDimensions', 'Wt', 'W'))
+        print 'signal:invfreqz:InvalidDimensions', 'Wt', 'W'
     
     
     #% if any( (w>pi) | (w<0) ) && realFlag 
     #%    warning(message('signal:invfreqz:InvalidRegion', 'W', 'INVFREQZ', '''complex''')) 
     #% end
-    [rw, cw] = matcompat.size(w)
+    [rw, cw] = w.shape
     if rw > cw:
         w = w.conj().T
     
     
-    [rg, cg] = matcompat.size(g)
+    [rg, cg] = g.shape
     if cg > rg:
         g = g.T
     
     
-    [rwf, cwf] = matcompat.size(wf)
+    [rwf, cwf] = wf.shape
     if cwf > rwf:
         wf = wf.conj().T
     
     
-    nm = matcompat.max(na, (nb+nk-1.))
-    OM = np.exp(np.dot(np.dot(np.dot(-1i., np.arange(0., (nm)+1).conj().T), w), T))
+    nm = max(na, (nb+nk-1.))
+    # OM=exp(-1i*(0:nm)'*w*T);
+    OM = np.exp(np.dot(np.dot(np.dot(-1j, np.arange(nm+1).conj().T), w), T))
     #%
     #% Estimation in the least squares case:
     #%
@@ -167,17 +183,17 @@ def invfreqz(g, w, varargin):
     
     
     #% Now for the iterative minimization
-    if isempty(maxiter):
+    if maxiter == None or maxiter < 1:
         maxiter = 30.
     
     
-    if isempty(tol):
+    if tol == None or tol < 0.01:
         tol = 0.01
     
     
     indb = np.arange(1., (length(b))+1)
     indg = np.arange(1., (length(a))+1)
-    a = polystab(a)
+    a = polystab(a) # Python spectrum TODO: http://nullege.com/codes/show/src@s@p@spectrum-0.5.6@src@spectrum@transfer.py
     #% Stabilizing the denominator
     #% The initial estimate:
     GC = (np.dot(b, OM[int(indb)-1,:])/np.dot(a, OM[int(indg)-1,:])).T
@@ -185,16 +201,17 @@ def invfreqz(g, w, varargin):
     Vcap = np.dot(e.conj().T, e)
     t = np.array(np.hstack((a[1:na+1.], b[int(nk+1.)-1:nk+nb]))).T
     if verb:
-        #%messages similar to invfreqs
-    clc
-    np.disp(np.array(np.hstack(('  ', getString(message('signal:invfreqs:INITIALESTIMATE'))))))
-    np.disp(np.array(np.hstack((getString(message('signal:invfreqs:CurrentFit')), num2str(Vcap)))))
-    np.disp(getString(message('signal:invfreqs:Parvector')))
-    np.disp(t)
-    
-    #%
-    #% ** the minimization loop **
-    #%
+        print "Verbose should be this"
+#         #%messages similar to invfreqs
+#     clc
+#     np.disp(np.array(np.hstack(('  ', getString(message('signal:invfreqs:INITIALESTIMATE'))))))
+#     np.disp(np.array(np.hstack((getString(message('signal:invfreqs:CurrentFit')), num2str(Vcap)))))
+#     np.disp(getString(message('signal:invfreqs:Parvector')))
+#     np.disp(t)
+#     
+#     #%
+#     #% ** the minimization loop **
+#     #%
     gndir = 2.*tol+1.
     l = 0.
     st = 0.
@@ -225,16 +242,16 @@ def invfreqz(g, w, varargin):
                 t1 = t
             
             
-            a = polystab(np.array(np.hstack((1., t1[0:na].T))))
+            a = polystab(np.array(np.hstack((1., t1[0:na].T)))) # TODO!
             t1[0:na] = a[1:na+1.].T
             #%Stabilizing denominator
             b = np.array(np.hstack((np.zeros(1., nk), t1[int(na+1.)-1:na+nb].T)))
             GC = (np.dot(b, OM[int(indb)-1,:])/np.dot(a, OM[int(indg)-1,:])).T
             V1 = np.dot(((GC-g)*wf).conj().T, (GC-g)*wf)
             t1 = np.array(np.hstack((a[1:na+1.], b[int(nk+1.)-1:nk+nb]))).T
-            if verb:
-                home
-                np.disp(int2str(ll))
+#             if verb:
+#                 home
+#                 np.disp(int2str(ll))
             
             
             k = k/2.
@@ -244,22 +261,22 @@ def invfreqz(g, w, varargin):
             
             
             if ll == 10.:
-                gndir = np.dot(matdiv(Vd, linalg.norm(R)), length(R))
+                gndir = np.dot(Vd, linalg.norm(R)) / length(R)
                 k = 1.
             
             
             
-        if verb:
-            home
-            np.disp(np.array(np.hstack(('      ', getString(message('signal:invfreqs:ITERATION')), int2str(l)))))
-            np.disp(np.array(np.hstack((getString(message('signal:invfreqs:CurrentFit')), num2str(V1), getString(message('signal:invfreqs:PreviousFit')), num2str(Vcap)))))
-            np.disp(getString(message('signal:invfreqs:CurrentParPrevparGNdir')))
-            np.disp(np.array(np.hstack((t1, t, gndir))))
-            np.disp(np.array(np.hstack((getString(message('signal:invfreqs:NormOfGNvector')), num2str(linalg.norm(gndir))))))
-            if st == 1.:
-                np.disp(getString(message('signal:invfreqs:NoImprovement')))
-                np.disp(getString(message('signal:invfreqs:IterationsThereforeTerminated')))
-            
+#         if verb:
+#             home
+#             np.disp(np.array(np.hstack(('      ', getString(message('signal:invfreqs:ITERATION')), int2str(l)))))
+#             np.disp(np.array(np.hstack((getString(message('signal:invfreqs:CurrentFit')), num2str(V1), getString(message('signal:invfreqs:PreviousFit')), num2str(Vcap)))))
+#             np.disp(getString(message('signal:invfreqs:CurrentParPrevparGNdir')))
+#             np.disp(np.array(np.hstack((t1, t, gndir))))
+#             np.disp(np.array(np.hstack((getString(message('signal:invfreqs:NormOfGNvector')), num2str(linalg.norm(gndir))))))
+#             if st == 1.:
+#                 np.disp(getString(message('signal:invfreqs:NoImprovement')))
+#                 np.disp(getString(message('signal:invfreqs:IterationsThereforeTerminated')))
+#             
             
         
         
