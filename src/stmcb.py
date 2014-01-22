@@ -55,7 +55,8 @@ def stmcb(*args):
     # Default assignments
     u_in = args[1]
     q = args[2]
-    p = args[3]
+    if len(args) >= 4:
+        p = args[3]
     if type(u_in) == type(1):
         if len(args) == 3:
             niter = 5

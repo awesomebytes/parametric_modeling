@@ -12,7 +12,7 @@ except ImportError:
 def convmtx(v, n):
 
     # Local Variables: cidx, c, x_left, ridx, m, n, x_right, mv, t, v, x, r, nv
-    # Function calls: convmtx, length, ones, zeros, size
+    # Function calls: convmtx, length, ones, zeros, size, toeplitz
     #%CONVMTX Convolution matrix.
     #%   CONVMTX(C,N) returns the convolution matrix for vector C.
     #%   If C is a column vector and X is a column vector of length N,
@@ -34,7 +34,7 @@ def convmtx(v, n):
     [mv, nv] = matcompat.size(v)
     v = v.flatten(1)
     #% make v a column vector
-    #%  t = toeplitz([v; zeros(n-1,1)],zeros(n,1));  put Toeplitz code inline
+    #t = toeplitz(np.array(np.vstack((np.hstack((v)), np.hstack((np.zeros((n-1.), 1.)))))), np.zeros(n, 1.))
     c = np.array(np.vstack((np.hstack((v)), np.hstack((np.zeros((n-1.), 1.))))))
     r = np.zeros(n, 1.)
     m = length(c)

@@ -71,8 +71,8 @@ for i=1:niter
    %u
    v = filter( 1, a, u_in );
    %v
-   C1 = convmtx(u(:),p+1);
-   C2 = convmtx(v(:),q+1);
+   C1 = convmtx_test(u(:),p+1);
+   C2 = convmtx_test(v(:),q+1);
    %T_left = -C1(1:N,:)
    %size(T_left)
    %T_right = C2(1:N,:)

@@ -19,14 +19,14 @@ if __name__ == '__main__':
     matlab = MatlabPipe(matlab_version='2013a')
     matlab.open()
     
-    cmd = """syst_fake=tf([1],[1 2 3])
-    syst_fake_dis=c2d(syst_fake,0.01)
-    [output,t]=step(syst_fake_dis)
-    out_len = length(output)
+    cmd = """syst_fake=tf([1],[1 2 3]);
+    syst_fake_dis=c2d(syst_fake,0.01);
+    [output,t]=step(syst_fake_dis);
+    out_len = length(output);
     input=1:out_len;
     input(:)=1;
     [num,den]=stmcb(output,input,0,2);
-    sys_model=tf(num,den,0.01)"""
+    sys_model=tf(num,den,0.01);"""
     out = matlab.eval(cmd)
     # Get matlab inputs
     #matlab_syst_fake = matlab.get('syst_fake')

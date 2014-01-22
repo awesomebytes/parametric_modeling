@@ -19,25 +19,37 @@ function t = convmtx(v,n)
 %   Copyright 1988-2004 The MathWorks, Inc.
 %   $Revision: 1.6.4.3 $  $Date: 2012/10/29 19:30:54 $
 
-[mv,nv] = size(v);
+[mv,nv] = size(v)
+v
 v = v(:);		% make v a column vector
+v
+toep_left = [v; zeros(n-1,1)]
+toep_right = zeros(n,1)
 
-%  t = toeplitz([v; zeros(n-1,1)],zeros(n,1));  put Toeplitz code inline
+t = toeplitz([v; zeros(n-1,1)],zeros(n,1))
+t
 c = [v; zeros(n-1,1)];
 r = zeros(n,1);
 m = length(c);
 x_left = r(n:-1:2);
 x_right = c(:);
-x = [x_left; x_right];
+x = [x_left; x_right]
 %x = [r(n:-1:2) ; c(:)];                 % build vector of user data
 
-cidx = (0:m-1)';
-ridx = n:-1:1;
-t = cidx(:,ones(n,1)) + ridx(ones(m,1),:);    % Toeplitz subscripts
+cidx = (0:m-1)'
+ridx = n:-1:1
+t = cidx(:,ones(n,1)) + ridx(ones(m,1),:)    % Toeplitz subscripts
 t(:) = x(t);                            % actual data
 % end of toeplitz code
-
+mv
+nv
+lol = 1
+t
+lol2 = 2
 if mv < nv
+    mv
+    nv
+    display('transposing...')
 	t = t.';
 end
 
