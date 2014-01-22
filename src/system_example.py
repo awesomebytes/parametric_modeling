@@ -11,7 +11,7 @@ from matplotlib.pyplot import plot, show # Grab MATLAB plotting functions
 from control.matlab import tf, c2d, step    # MATLAB-like functions
 #from scipy.signal import cont2discrete as c2d
 #from scipy.signal import step
-from stmbc import stmcb
+from stmcb import stmcb
 
 
 # MATLAB:

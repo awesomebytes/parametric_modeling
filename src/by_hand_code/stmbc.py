@@ -121,7 +121,7 @@ def stmcb(x, u_in=None, q=None, p=None, niter=5, a_in=None):
 #    c = T(:,2:p+q+2)\(-T(:,1));   % move 1st column to RHS and do least-squares
 # Si la matriz no es cuadrada: numpy.linalg.lstsq
 # Si la matriz es cuadrada: numpy.linalg.solve
-        if T.shape[0] == T.shape[1]:
+        if T.shape[0] != T.shape[1]:
             c = np.linalg.lstsq(a, b)
 
 #    a = [1; c(1:p)];                % denominator coefficients

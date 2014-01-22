@@ -67,17 +67,26 @@ end
 a = a_in;
 N = length(x);
 for i=1:niter
-   a
-   %x
    u = filter( 1, a, x );
-   u
-   error('stop here')
+   %u
    v = filter( 1, a, u_in );
+   %v
    C1 = convmtx(u(:),p+1);
    C2 = convmtx(v(:),q+1);
+   %T_left = -C1(1:N,:)
+   %size(T_left)
+   %T_right = C2(1:N,:)
+   %size(T_right)
    T = [ -C1(1:N,:) C2(1:N,:) ];
+   %T
+   %size(T)
+   %error('stop here')
    c = T(:,2:p+q+2)\(-T(:,1));   % move 1st column to RHS and do least-squares
+   c
+   size(c)
    a = [1; c(1:p)];                % denominator coefficients
+   a
+   size(a)
    b = c(p+1:p+q+1);               % numerator coefficients
 end
 a=a.';
