@@ -10,13 +10,19 @@ Using spectrum implementation:
 http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html
 search for modcovar (can't direct link it)
 """
-# import numpy as np
+import numpy as np
 # import scipy
 # from matcompat import *
 import spectrum
 
 def armcov(x, p):
-    return spectrum.modcovar(x, p)
+    [E, A] = spectrum.modcovar(x, int(p)) # We compute this one because gives back same number of elements in E
+    number_of_elements = len(E)
+    [E, A, ISTAT] =spectrum.modcovar_marple(x, int(p)) # works slower but is more accurate with the error than modcovar
+    E = E[:number_of_elements]
+    E = np.hstack((1, E))
+    
+    return E, A
 
 ### ORIGINAL IMPLEMENTATION
     # Local Variables: a, msgobj, p, msg, x, e
