@@ -1,73 +1,57 @@
-#!/usr/bin/env python
-""" This file is a Python translation of the MATLAB file convm.m
-
- Python version by RDL 10 Jan 2012
- Copyright notice from convm.m:
- copyright 1996, by M.H. Hayes.  For use with the book 
- "Statistical Digital Signal Processing and Modeling"
- (John Wiley & Sons, 1996).
-"""
 
 import numpy as np
+import scipy
+import matcompat
+from matcompat import *
+
+# if available import pylab (from matlibplot)
+try:
+    import matplotlib.pylab as plt
+except ImportError:
+    pass
 
 def convmtx(v, n):
-    """Generates a convolution matrix
-    
-    Usage: X = convm(v,n)
-    Given a vector v of length N, an N+n-1 by n convolution matrix is
-    generated of the following form:
-              |  v(0)  0      0     ...      0    |
-              |  v(1) v(0)    0     ...      0    |
-              |  v(2) v(1)   v(0)   ...      0    |
-         X =  |   .    .      .              .    |
-              |   .    .      .              .    |
-              |   .    .      .              .    |
-              |  v(N) v(N-1) v(N-2) ...  v(N-n+1) |
-              |   0   v(N)   v(N-1) ...  v(N-n+2) |
-              |   .    .      .              .    |
-              |   .    .      .              .    |
-              |   0    0      0     ...    v(N)   |
-    And then it's trasposed to fit the MATLAB return value.     
-    That is, v is assumed to be causal, and zero-valued after N.
 
-    """
-    N = len(v) + 2*n - 2
-    xpad = np.concatenate([np.zeros(n-1), v[:], np.zeros(n-1)])
-    X = np.zeros((len(v)+n-1, n))
-    # Construct X column by column
-    for i in xrange(n):
-        X[:,i] = xpad[n-i-1:N-i]
+    # Local Variables: cidx, c, x_left, ridx, m, n, x_right, mv, t, v, x, r, nv
+    # Function calls: convmtx, length, ones, zeros, size
+    #%CONVMTX Convolution matrix.
+    #%   CONVMTX(C,N) returns the convolution matrix for vector C.
+    #%   If C is a column vector and X is a column vector of length N,
+    #%   then CONVMTX(C,N)*X is the same as CONV(C,X).
+    #%   If R is a row vector and X is a row vector of length N,
+    #%   then X*CONVMTX(R,N) is the same as CONV(R,X).
+    #%
+    #%   % Example:
+    #%   %   Generate a simple convolution matrix.
+    #%
+    #%   h = [1 2 3 2 1];
+    #%   convmtx(h,7)        % Convolution matrix
+    #%
+    #%   See also CONV.
+    #%   Author(s): L. Shure, 47-88
+    #%   	   T. Krauss, 3-30-93, removed dependence on toeplitz
+    #%   Copyright 1988-2004 The MathWorks, Inc.
+    #%   $Revision: 1.6.4.3 $  $Date: 2012/10/29 19:30:54 $
+    [mv, nv] = matcompat.size(v)
+    v = v.flatten(1)
+    #% make v a column vector
+    #%  t = toeplitz([v; zeros(n-1,1)],zeros(n,1));  put Toeplitz code inline
+    c = np.array(np.vstack((np.hstack((v)), np.hstack((np.zeros((n-1.), 1.))))))
+    r = np.zeros(n, 1.)
+    m = length(c)
+    x_left = r[int(n)-1:2.:-1.]
+    x_right = c.flatten(1)
+    x = np.array(np.vstack((np.hstack((x_left)), np.hstack((x_right)))))
+    #%x = [r(n:-1:2) ; c(:)];                 % build vector of user data
+    cidx = np.arange(0., (m-1.)+1).conj().T
+    ridx = np.arange(n, (1.)+(-1.), -1.)
+    t = cidx[:,int(np.ones(n, 1.))-1]+ridx[int(np.ones(m, 1.))-1,:]
+    #% Toeplitz subscripts
+    t[:] = x[int(t)-1]
+    #% actual data
+    #% end of toeplitz code
+    if mv<nv:
+        t = t.T
     
-    return X.transpose()
     
-def main():
-    """Just a test"""
-    h = [1,2,3,2,1]
-    X = convmtx(h,7)
-    print(X)
-    
-## MATLAB OUTPUT:
-# >> h = [1 2 3 2 1];
-# >> convmtx(h,7)
-# 
-# ans =
-# 
-#      1     2     3     2     1     0     0     0     0     0     0
-#      0     1     2     3     2     1     0     0     0     0     0
-#      0     0     1     2     3     2     1     0     0     0     0
-#      0     0     0     1     2     3     2     1     0     0     0
-#      0     0     0     0     1     2     3     2     1     0     0
-#      0     0     0     0     0     1     2     3     2     1     0
-#      0     0     0     0     0     0     1     2     3     2     1
-## PYTHON OUTPUT:
-# array([[ 1.,  2.,  3.,  2.,  1.,  0.,  0.,  0.,  0.,  0.,  0.],
-#        [ 0.,  1.,  2.,  3.,  2.,  1.,  0.,  0.,  0.,  0.,  0.],
-#        [ 0.,  0.,  1.,  2.,  3.,  2.,  1.,  0.,  0.,  0.,  0.],
-#        [ 0.,  0.,  0.,  1.,  2.,  3.,  2.,  1.,  0.,  0.,  0.],
-#        [ 0.,  0.,  0.,  0.,  1.,  2.,  3.,  2.,  1.,  0.,  0.],
-
-
-    
-if __name__ == '__main__':
-    main()
-
+    return [t]
