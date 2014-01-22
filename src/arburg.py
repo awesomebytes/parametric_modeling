@@ -28,11 +28,11 @@ def arburg(*args):
     p = args[1]
     if len(args) == 3:
         criteria = args[2]
-        return spectrum.arburg(x, p, criteria)
+        [A, E, K] = spectrum.arburg(x, p, criteria)
     else:
         [A, E, K] = spectrum.arburg(x, p)
-        A = np.hstack((1, A)) # Adding unity, MATLAB gives it
-        return A, E
+    A = np.hstack((1, A)) # Adding unity, MATLAB gives it
+    return A, E
 
 
 
