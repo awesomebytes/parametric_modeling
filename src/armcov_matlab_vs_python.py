@@ -5,7 +5,7 @@ Created on Jan 22 22:26 2014
 
 @author: Sammy Pfeiffer
 
-Test our python arcov vs the MatlabTM armcov
+Test our python armcov vs the MatlabTM armcov
 
 MATLAB testing code from:
 http://www.music.mcgill.ca/~gary/307/matlab/predict.m

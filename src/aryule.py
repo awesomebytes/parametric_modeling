@@ -10,13 +10,15 @@ Using spectrum implementation:
 http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.yulewalker.aryule
 
 """
-# import numpy as np
+import numpy as np
 # import scipy
 # from matcompat import *
 import spectrum
 
 def aryule(x, p):
-    return spectrum.aryule(x, p)
+    [A, E, K] = spectrum.aryule(x, p)
+    A = np.hstack((1, A)) # MATLAB adds the first "1.0"
+    return A, E, K
 
     # Local Variables: a, e, k, nx, p, R, x, mx
     # Function calls: aryule, nargchk, min, issparse, nargin, length, isempty, error, levinson, message, xcorr, round, size
