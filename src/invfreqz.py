@@ -12,16 +12,9 @@ polystab
 from spectrum library has it implemented....
 """
 import numpy as np
-import scipy
-from scipy import linalg
-from matcompat import *
+from scipy.linalg import norm, solve
+#from spectrum import polystab # function not yet implemented as of 22 Jan 2014
 
-
-# if available import pylab (from matlibplot)
-try:
-    import matplotlib.pylab as plt
-except ImportError:
-    pass
 
 def invfreqz(g, w, varargin):
 
@@ -95,7 +88,7 @@ def invfreqz(g, w, varargin):
     
     gaussFlag = len(varargin) > 3.
     #% run Gauss-Newton algorithm or not?
-    if length(varargin)<6.:
+    if len(varargin)<6.:
         varargin.cell[5] = np.array([])
         #% pad varargin with []'s
     
@@ -136,7 +129,7 @@ def invfreqz(g, w, varargin):
         print 'signal:invfreqz:InvalidDimensions', 'H', 'W'
     
     
-    if length(wf) != length(w):
+    if len(wf) != len(w):
         print 'signal:invfreqz:InvalidDimensions', 'Wt', 'W'
     
     
@@ -175,7 +168,7 @@ def invfreqz(g, w, varargin):
         Vd = np.dot(D.conj().T, -g*wf)
         
     
-    th = linalg.solve(R, Vd)
+    th = solve(R, Vd) # if not squared we must use lstsq!!!
     a = np.array(np.hstack((1., th[0:na].T)))
     b = np.array(np.hstack((np.zeros(1., nk), th[int(na+1.)-1:na+nb].T)))
     if not gaussFlag:
@@ -191,8 +184,8 @@ def invfreqz(g, w, varargin):
         tol = 0.01
     
     
-    indb = np.arange(1., (length(b))+1)
-    indg = np.arange(1., (length(a))+1)
+    indb = np.arange(1., (len(b))+1)
+    indg = np.arange(1., (len(a))+1)
     a = polystab(a) # Python spectrum TODO: http://nullege.com/codes/show/src@s@p@spectrum-0.5.6@src@spectrum@transfer.py
     #% Stabilizing the denominator
     #% The initial estimate:
@@ -215,7 +208,7 @@ def invfreqz(g, w, varargin):
     gndir = 2.*tol+1.
     l = 0.
     st = 0.
-    while np.all(np.array(np.hstack((linalg.norm(gndir) > tol, l<maxiter, st != 1.)))):
+    while np.all(np.array(np.hstack((norm(gndir) > tol, l<maxiter, st != 1.)))):
         l = l+1.
         #%     * compute gradient *
         D31 = OM[1:na+1.,:].T*np.dot(-GC/np.dot(a, OM[0:na+1.,:]).T, np.ones(1., na))
@@ -231,7 +224,7 @@ def invfreqz(g, w, varargin):
             Vd = np.dot(D3.conj().T, e)
             
         
-        gndir = linalg.solve(R, Vd)
+        gndir = solve(R, Vd)
         #%     * search along the gndir-direction *
         ll = 0.
         k = 1.
@@ -261,7 +254,7 @@ def invfreqz(g, w, varargin):
             
             
             if ll == 10.:
-                gndir = np.dot(Vd, linalg.norm(R)) / length(R)
+                gndir = np.dot(Vd, norm(R)) / len(R)
                 k = 1.
             
             

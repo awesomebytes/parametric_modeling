@@ -3,16 +3,15 @@
 """
 From:
 http://projects.scipy.org/scipy/attachment/ticket/393/invfreq.py
+
+Cleaned up a bit, removed unused imports.
 """
 
 
 import numpy
-from numpy import atleast_1d, poly, polyval, roots, real, asarray, allclose, \
-     resize, pi, absolute, logspace, r_, sqrt, tan, log10, arctan, arcsinh, \
-     cos, exp, cosh, arccosh, ceil, conjugate, zeros, sinh, roots, imag
-from numpy import mintypecode
-from scipy import special, optimize, linalg
-import string, types
+from numpy import atleast_1d, real
+from scipy.linalg import solve
+
 
 def invfreqs(g, worN, nB, nA, wf=None, nk=0):
     """Compute frequency response of a digital filter.
@@ -61,7 +60,7 @@ def invfreqs(g, worN, nB, nA, wf=None, nk=0):
     mM = numpy.mat(numpy.hstack(( mH*numpy.mat(mD[:,-nA:]),\
             -numpy.mat(mD[:,-nk-nB-1:][:,:nB+1]))))
     mW = numpy.mat(numpy.diag(wf))
-    Y = linalg.solve(real(mM.H*mW*mM), -real(mM.H*mW*mH*numpy.mat(mD)[:,-nA-1]))
+    Y = solve(real(mM.H*mW*mM), -real(mM.H*mW*mH*numpy.mat(mD)[:,-nA-1]))
     a = numpy.ones(nA+1)
     a[1:] = Y[:nA].flatten()
     b = numpy.zeros(nB+nk+1)

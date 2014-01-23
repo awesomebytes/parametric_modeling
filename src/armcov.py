@@ -16,7 +16,7 @@ import spectrum
 def armcov(x, p):
     [E, A] = spectrum.modcovar(x, int(p)) # We compute this one because gives back same number of elements in E
     number_of_elements = len(E)
-    [E, A, ISTAT] =spectrum.modcovar_marple(x, int(p)) # works slower but is more accurate with the error than modcovar
+    [E, A, ISTAT] = spectrum.modcovar_marple(x, int(p)) # works slower but is more accurate with the error than modcovar
     E = E[:number_of_elements]
     E = np.hstack((1, E))
     
