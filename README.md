@@ -86,4 +86,26 @@ A MATLAB to Python code translator which doesn't do all the job but helps
 I've rehosted it now in Github https://github.com/awesomebytes/libermate to give it more visibility and 
 add it's README to it and my advice on how to use it if you ever want to translate a MATLAB script to Python.
 
+Guide on How to translate a MATLAB file to Python
+====================
+
+1) Use libermate for making a quick automatic translation
+
+python libermate.py ~/my_path_to/my_matlab_script.m
+
+If you have problems check my file: https://github.com/awesomebytes/libermate/blob/master/notes_on_using_libermate.txt
+
+2) Correct other errors (many mentioned in notes_on_using_libermate.txt), use http://wiki.scipy.org/NumPy_for_Matlab_Users for helping yourself
+
+3) Check little pieces of code executing in MATLAB the same line using https://github.com/awesomebytes/python-mlabwrap Use any of my test files as an example on how to execute code and recover variables (structs and cells have some problems).
+
+4) Keep a iPython open to check little doubts (numpy arrays don't behave the same as MATLAB matrices)
+
+5) Use some IDE on Python to ease your life looking at how to use functions and correcting coding errors, I recomend Eclipse + PyDev
+
+Eclipse (Standard 4.3.1 as of writing) http://www.eclipse.org/downloads/
+
+PyDev plugin (Instructions on how to install) http://pydev.org/manual_101_install.html
+
+You may need to update Java, here you have a nice tutorial on that: http://www.webupd8.org/2012/01/install-oracle-java-jdk-7-in-ubuntu-via.html
 
