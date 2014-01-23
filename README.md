@@ -39,9 +39,7 @@ Working thanks to... me!
 
 ===================
 
-Developed using Python 2.7
-Eclipse + PyDev
-MATLAB R2013a 64 bits
+Developed using Python 2.7, Eclipse + PyDev, MATLAB R2013a 64 bits
 
 * Using numpy 1.6.1 (from ubuntu debs, using Ubuntu 12.04 64 bit)
 ```
