@@ -5,6 +5,7 @@ Created on Sun Jan 6 20:54:46 2014
 Redone on Jan 22 12:00:00 2014
 
 @author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
 This file pretends to imitate the behavior of the MATLAB function prony
 """
 import numpy as np

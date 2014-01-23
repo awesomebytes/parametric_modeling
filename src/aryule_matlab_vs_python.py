@@ -4,6 +4,7 @@
 Created on Jan 22 22:26 2014
 
 @author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
 
 Test our python aryule vs the MatlabTM aryule
 

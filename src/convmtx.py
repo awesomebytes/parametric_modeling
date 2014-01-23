@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-""" This file is a Python translation of the MATLAB file convm.m
+# -*- coding: utf-8 -*-
+""" 
+Created on Jan 22 21:38 2014
 
- Python version by RDL 10 Jan 2012
- Copyright notice from convm.m:
- copyright 1996, by M.H. Hayes.  For use with the book 
- "Statistical Digital Signal Processing and Modeling"
- (John Wiley & Sons, 1996).
+@author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
+This file pretends to imitate the behavior of the MATLAB function convmtx
+
 """
 
 import numpy as np

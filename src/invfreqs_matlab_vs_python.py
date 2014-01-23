@@ -4,6 +4,7 @@
 Created on Jan 22 16:56 2014
 
 @author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
 
 Test our python invfreqs vs the MatlabTM invfreqs
 """

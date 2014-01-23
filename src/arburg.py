@@ -4,6 +4,7 @@
 Created on Jan 22 20:38 2014
 
 @author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
 This file pretends to imitate the behaviour of the MATLAB function arburg
 
 This function can't be tested as the main MATLAB functions isn't even working,

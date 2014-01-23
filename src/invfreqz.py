@@ -4,6 +4,7 @@
 Created on Jan 22 22:01 2014
 
 @author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
 
 invfreqz in python based on the matlab implementation
 

@@ -4,6 +4,7 @@
 Created on Jan 22 17:18 2014
 
 @author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
 
 Test our python cnvmtx vs the MatlabTM cnvmtx
 """

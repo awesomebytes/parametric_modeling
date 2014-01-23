@@ -1,7 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-From:
+Created on Jan 22 23:56 2014
+
+I'm not really the author, but...
+@author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
+
+File found at:
 http://projects.scipy.org/scipy/attachment/ticket/393/invfreq.py
 
 Cleaned up a bit, removed unused imports.

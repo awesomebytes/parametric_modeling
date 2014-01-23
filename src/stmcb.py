@@ -4,6 +4,7 @@
 Created on Jan 22 20:38 2014
 
 @author: Sammy Pfeiffer
+@email: sammypfeiffer@gmail.com
 This file imitates the behaviour of stmcb of MatlabTM
 
 """
