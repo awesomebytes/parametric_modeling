@@ -8,33 +8,33 @@ The idea is to have all the functions listed at: http://www.mathworks.es/es/help
 Right now we have:
 
 * **arburg**	Autoregressive (AR) all-pole model parameters estimated using Burg method
-Working thanks to spectrum arburg (http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.burg.arburg)
+  * Working thanks to spectrum arburg (http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.burg.arburg)
 
 * **arcov**	Estimate AR model parameters using covariance method
-Working thanks to spectrum arcovar (http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html#spectrum.covar.arcovar)
+  * Working thanks to spectrum arcovar (http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html#spectrum.covar.arcovar)
 
 * **armcov**	Estimate AR model parameters using modified covariance method
-Working thanks to spectrum modcovar (http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html#spectrum.modcovar.modcovar)
+  * Working thanks to spectrum modcovar (http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html#spectrum.modcovar.modcovar)
 
 * **aryule**	Estimate autoregressive (AR) all-pole model using Yule-Walker method
-Working thanks to spectrum aryule (http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.yulewalker.aryule)
+  * Working thanks to spectrum aryule (http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.yulewalker.aryule)
 
 * **invfreqs**	Identify continuous-time filter parameters from frequency response data
-Working thanks to a file found at http://projects.scipy.org/scipy/attachment/ticket/393/invfreq.py
+  * Working thanks to a file found at http://projects.scipy.org/scipy/attachment/ticket/393/invfreq.py
 
 * **invfreqz**	Identify discrete-time filter parameters from frequency response data
-Not working :( whenever polystab function in spectrum is implemented this file can be finalized easily (it's nearly done!)
+  * Not working :( whenever polystab function in spectrum is implemented this file can be finalized easily (it's nearly done!)
 
 * **prony**	 Prony method for filter design
-Working thanks to... me!
+  * Working thanks to... me!
 
 * **stmcb**	Compute linear model using Steiglitz-McBride iteration
-Working thanks to... me!
+  * Working thanks to... me!
 
 Also I needed to implement:
 
 * **convmtx**    Convolution matrix
-Working thanks to... me!
+  * Working thanks to... me!
 
 
 ===================
