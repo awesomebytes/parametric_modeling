@@ -11,8 +11,6 @@ http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.
 
 """
 import numpy as np
-# import scipy
-# from matcompat import *
 import spectrum
 
 def aryule(x, p):

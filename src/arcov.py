@@ -10,8 +10,6 @@ Using spectrum implementation:
 http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html#spectrum.covar.arcovar
 """
 import numpy as np
-import scipy
-from matcompat import *
 import spectrum
 
 def arcov(x, p):

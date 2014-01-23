@@ -15,10 +15,7 @@ But there is still a python version from which we can get it's functionality
 http://thomas-cokelaer.info/software/spectrum/html/user/ref_param.html#spectrum.burg.arburg
 
 """
-#import numpy as np
-#import scipy
-#import matcompat
-#from matcompat import *
+
 import spectrum
 import numpy as np
 

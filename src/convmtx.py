@@ -12,27 +12,6 @@ import numpy as np
 from scipy.linalg import toeplitz
 
 def convmtx(v, n):
-    """Generates a convolution matrix
-    
-    Usage: X = convm(v,n)
-    Given a vector v of length N, an N+n-1 by n convolution matrix is
-    generated of the following form:
-              |  v(0)  0      0     ...      0    |
-              |  v(1) v(0)    0     ...      0    |
-              |  v(2) v(1)   v(0)   ...      0    |
-         X =  |   .    .      .              .    |
-              |   .    .      .              .    |
-              |   .    .      .              .    |
-              |  v(N) v(N-1) v(N-2) ...  v(N-n+1) |
-              |   0   v(N)   v(N-1) ...  v(N-n+2) |
-              |   .    .      .              .    |
-              |   .    .      .              .    |
-              |   0    0      0     ...    v(N)   |   
-    That is, v is assumed to be causal, and zero-valued after N.
-
-    """
-
-
     # Local Variables: cidx, c, x_left, ridx, m, n, x_right, mv, t, v, x, r, nv
     # Function calls: convmtx, length, ones, zeros, size, toeplitz
     #%CONVMTX Convolution matrix.
@@ -96,6 +75,26 @@ def convmtx(v, n):
     
     
     
+
+#         """Generates a convolution matrix
+#     
+#     Usage: X = convm(v,n)
+#     Given a vector v of length N, an N+n-1 by n convolution matrix is
+#     generated of the following form:
+#               |  v(0)  0      0     ...      0    |
+#               |  v(1) v(0)    0     ...      0    |
+#               |  v(2) v(1)   v(0)   ...      0    |
+#          X =  |   .    .      .              .    |
+#               |   .    .      .              .    |
+#               |   .    .      .              .    |
+#               |  v(N) v(N-1) v(N-2) ...  v(N-n+1) |
+#               |   0   v(N)   v(N-1) ...  v(N-n+2) |
+#               |   .    .      .              .    |
+#               |   .    .      .              .    |
+#               |   0    0      0     ...    v(N)   |   
+#     That is, v is assumed to be causal, and zero-valued after N.
+# 
+#     """
     
 #     N = len(v) + 2*n - 2
 #     xpad = np.concatenate([np.zeros(n-1), v[:], np.zeros(n-1)])

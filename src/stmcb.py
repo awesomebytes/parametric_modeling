@@ -1,10 +1,15 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+Created on Jan 22 20:38 2014
 
+@author: Sammy Pfeiffer
+This file imitates the behaviour of stmcb of MatlabTM
+
+"""
 import numpy as np
-import scipy
 from scipy.linalg import solve, lstsq
 from scipy.signal import lfilter
-import matcompat
-from matcompat import *
 from convmtx import convmtx
 from prony import prony
 
@@ -76,7 +81,7 @@ def stmcb(*args):
             p = args[2]
             q = u_in
             
-        u_in = np.zeros(matcompat.size(x))
+        u_in = np.zeros(len(x))
         u_in[0] = 1.
         #% make a unit impulse whose length is same as x
     else:

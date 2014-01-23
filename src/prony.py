@@ -8,10 +8,7 @@ Redone on Jan 22 12:00:00 2014
 This file pretends to imitate the behaviour of the MATLAB function prony
 """
 import numpy as np
-import scipy
 from scipy.linalg import toeplitz, solve
-import matcompat
-from matcompat import *
 
 # if available import pylab (from matlibplot)
 # try:

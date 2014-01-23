@@ -12,7 +12,6 @@ from numpy import atleast_1d, poly, polyval, roots, real, asarray, allclose, \
      cos, exp, cosh, arccosh, ceil, conjugate, zeros, sinh, roots, imag
 from numpy import mintypecode
 from scipy import special, optimize, linalg
-# from scipy.misc import comb
 import string, types
 
 def invfreqs(g, worN, nB, nA, wf=None, nk=0):

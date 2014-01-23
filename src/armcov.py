@@ -11,8 +11,6 @@ http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html
 search for modcovar (can't direct link it)
 """
 import numpy as np
-# import scipy
-# from matcompat import *
 import spectrum
 
 def armcov(x, p):
