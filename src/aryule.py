@@ -15,6 +15,32 @@ import numpy as np
 import spectrum
 
 def aryule(x, p):
+    """From MATLAB:
+    %   A = ARYULE(X,ORDER) returns the polynomial A corresponding to the AR
+    %   parametric signal model estimate of vector X using the Yule-Walker
+    %   (autocorrelation) method.  ORDER is the model order of the AR system. 
+    %   This method solves the Yule-Walker equations by means of the Levinson-
+    %   Durbin recursion.
+    %
+    %   [A,E] = ARYULE(...) returns the final prediction error E (the variance
+    %   estimate of the white noise input to the AR model).
+    %
+    %   [A,E,K] = ARYULE(...) returns the vector K of reflection coefficients.
+    
+    Using spectrum aryule:
+    def aryule(X, order, norm='biased', allow_singularity=True):
+        Compute AR coefficients using Yule-Walker method
+        
+        :param X: Array of complex data values, X(1) to X(N)
+        :param int order: Order of autoregressive process to be fitted (integer)
+        :param str norm: Use a biased or unbiased correlation.
+        :param bool allow_singularity: 
+        
+        :return:
+        * AR coefficients (complex)
+        * variance of white noise (Real)
+        * reflection coefficients for use in lattice filter 
+    """
     [A, E, K] = spectrum.aryule(x, p)
     A = np.hstack((1, A)) # MATLAB adds the first "1.0"
     return A, E, K

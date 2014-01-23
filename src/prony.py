@@ -13,6 +13,17 @@ from scipy.linalg import toeplitz
 
 
 def prony(h, nb, na):
+    """From MATLAB:
+    %PRONY Prony's method for time-domain IIR filter design.
+    %   [B,A] = PRONY(H, NB, NA) finds a filter with numerator order
+    %   NB, denominator order NA, and having the impulse response in
+    %   vector H.   The IIR filter coefficients are returned in
+    %   length NB+1 and NA+1 row vectors B and A, ordered in
+    %   descending powers of Z.  H may be real or complex.
+    %
+    %   If the largest order specified is greater than the length of H,
+    %   H is padded with zeros.
+    """
 
     # Local Variables: a, c, b, h1, h, nb, H1, M, N, H2, H, na, H2_minus, K
     # Function calls: max, length, prony, zeros, toeplitz

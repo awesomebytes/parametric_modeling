@@ -14,6 +14,25 @@ import numpy as np
 import spectrum
 
 def arcov(x, p):
+    """From MATLAB:
+    %   A = ARCOV(X,ORDER) returns the polynomial A corresponding to the AR
+    %   parametric signal model estimate of vector X using the Covariance method.
+    %   ORDER is the model order of the AR system.
+    %
+    %   [A,E] = ARCOV(...) returns the variance estimate E of the white noise
+    %   input to the AR model.
+    
+    Using from spectrum:
+    def arcovar(x, order):
+        Simple and fast implementation of the covariance AR estimate
+        
+        :param array X:  Array of complex data samples
+        :param int oder: Order of linear prediction model
+        
+        :return:
+        * a - Array of complex forward linear prediction coefficients
+        * e - error
+    """
     [A, E] = spectrum.covar.arcovar(x,p)
     A = np.hstack((1,A)) # MATLAB gives back initial value 1, so we do the same 
     return A, E

@@ -15,6 +15,17 @@ import numpy as np
 import spectrum
 
 def armcov(x, p):
+    """From MATLAB:
+    %   A = ARMCOV(X,ORDER) returns the polynomial A corresponding to the AR
+    %   parametric signal model estimate of vector X using the Modified Covariance
+    %   method. ORDER is the model order of the AR system. 
+    %
+    %   [A,E] = ARMCOV(...) returns the variance estimate E of the white noise
+    %   input to the AR model.
+    
+    Using from spectrum modcovar and modcovar_marple:
+    Check http://thomas-cokelaer.info/software/spectrum/html/user/ref_psd_other.html#spectrum.modcovar.modcovar
+    """
     [E, A] = spectrum.modcovar(x, int(p)) # We compute this one because gives back same number of elements in E
     number_of_elements = len(E)
     [E, A, ISTAT] = spectrum.modcovar_marple(x, int(p)) # works slower but is more accurate with the error than modcovar

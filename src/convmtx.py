@@ -13,6 +13,14 @@ import numpy as np
 from scipy.linalg import toeplitz
 
 def convmtx(v, n):
+    """From MATLAB:
+    %CONVMTX Convolution matrix.
+    %   CONVMTX(C,N) returns the convolution matrix for vector C.
+    %   If C is a column vector and X is a column vector of length N,
+    %   then CONVMTX(C,N)*X is the same as CONV(C,X).
+    %   If R is a row vector and X is a row vector of length N,
+    %   then X*CONVMTX(R,N) is the same as CONV(R,X).
+    """
     # Local Variables: cidx, c, x_left, ridx, m, n, x_right, mv, t, v, x, r, nv
     # Function calls: convmtx, length, ones, zeros, size, toeplitz
     #%CONVMTX Convolution matrix.

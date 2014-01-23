@@ -22,6 +22,37 @@ import numpy as np
 
 #def arburg(x, p): # original def
 def arburg(*args):
+    """From MATLAB:
+    
+    %ARBURG   AR parameter estimation via Burg method.
+    %   A = ARBURG(X,ORDER) returns the polynomial A corresponding to the AR
+    %   parametric signal model estimate of vector X using Burg's method.
+    %   ORDER is the model order of the AR system.
+    %
+    %   [A,E] = ARBURG(...) returns the final prediction error E (the variance
+    %   estimate of the white noise input to the AR model).
+    %
+    %   [A,E,K] = ARBURG(...) returns the vector K of reflection 
+    %   coefficients (parcor coefficients).
+    
+    Using spectrum arburg:
+    def arburg(X, order, criteria=None):
+        Estimate the complex autoregressive parameters by the Burg algorithm.
+        
+        .. math:: x(n) = \sqrt{(v}) e(n) + \sum_{k=1}^{P+1} a(k) x(n-k)
+        
+        :param x:  Array of complex data samples (length N)
+        :param order: Order of autoregressive process (0<order<N)
+        :param criteria: select a criteria to automatically select the order 
+        
+        :return:
+        * A Array of complex autoregressive parameters A(1) to A(order). First 
+        value (unity) is not included !! 
+        * P Real variable representing driving noise variance (mean square 
+        of residual noise) from the whitening operation of the Burg 
+        filter.
+        * reflection coefficients defining the filter of the model.
+    """
     x = args[0]
     p = args[1]
     if len(args) == 3:

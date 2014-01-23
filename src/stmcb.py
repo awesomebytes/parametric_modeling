@@ -22,6 +22,23 @@ from prony import prony
 #def stmcb(x, u_in=None, q=None, p=None, niter=5, a_in=None): # Old definition
 #function [b,a] = stmcb_test( x, u_in, q, p, niter, a_in ) # matlab definition
 def stmcb(*args):
+    """From MATLAB:
+    %STMCB Compute linear model via Steiglitz-McBride iteration
+    %   [B,A] = stmcb(H,NB,NA) finds the coefficients of the system 
+    %   B(z)/A(z) with approximate impulse response H, NA poles and 
+    %   NB zeros.
+    %
+    %   [B,A] = stmcb(H,NB,NA,N) uses N iterations.  N defaults to 5.
+    %
+    %   [B,A] = stmcb(H,NB,NA,N,Ai) uses the vector Ai as the initial 
+    %   guess at the denominator coefficients.  If you don't specify Ai, 
+    %   STMCB uses [B,Ai] = PRONY(H,0,NA) as the initial conditions.
+    %
+    %   [B,A] = STMCB(Y,X,NB,NA,N,Ai) finds the system coefficients B and 
+    %   A of the system which, given X as input, has Y as output.  N and Ai
+    %   are again optional with default values of N = 5, [B,Ai] = PRONY(Y,0,NA).
+    %   Y and X must be the same length.
+    """
 
     # Local Variables: T_sub2, T_sub1, T_minus, C2, C1, a_in, N, u_in, T, a, niter, c, b, i, q, p, u, v, x, T_left, T_right, C1_minus
     # Function calls: convmtx, filter, prony, nargchk, stmcb, nargin, length, zeros, error, message, size
