@@ -89,6 +89,8 @@ add it's README to it and my advice on how to use it if you ever want to transla
 Guide on How to translate a MATLAB file to Python
 ====================
 
+Note: I haven't tried it, but you may want to try: https://github.com/victorlei/smop for the automatic MATLAB->Python translation
+
 1) Use libermate for making a quick automatic translation
 
 python libermate.py ~/my_path_to/my_matlab_script.m
