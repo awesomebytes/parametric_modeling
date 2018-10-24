@@ -23,7 +23,7 @@ Right now we have:
   * Working thanks to a file found at http://projects.scipy.org/scipy/attachment/ticket/393/invfreq.py
 
 * **invfreqz**	Identify discrete-time filter parameters from frequency response data
-  * Not working :( whenever polystab function in spectrum is implemented this file can be finalized easily (it's nearly done!)
+  * Not working :( whenever polystab function in spectrum is implemented this file can be finalized easily (it's nearly done!) Note that I found a maybe working implementation here: https://github.com/yurochka/dsptools/blob/master/dsptools/invfreqz.py 
 
 * **prony**	 Prony method for filter design
   * Working thanks to... me!
