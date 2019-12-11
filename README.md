@@ -5,6 +5,8 @@ Parametric modelling functions that can be found in MATLAB... now in Python!
 (AR, ARMA, frequency response modeling)
 The idea is to have all the functions listed at: http://www.mathworks.es/es/help/signal/parametric-modeling.html
 
+Note about license: All the code I wrote is BSD as stated in the LICENSE file. Any commented/inspired by MATLAB code is of their own property. Given this was a project for university I won't dig further into this issue. If you want to re-use this code, you should research under what conditions you can based on that.
+
 Right now we have:
 
 * **arburg**	Autoregressive (AR) all-pole model parameters estimated using Burg method
